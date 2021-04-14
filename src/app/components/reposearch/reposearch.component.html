@@ -1,0 +1,44 @@
+<nav class="navbar navbar-primary bg-primary">
+    <div class="container-fluid">
+  <a class="navbar-brand" routerLink="/users"></a>
+      <form class="d-flex">
+        <a class="navbar-brand" routerLink="/users">Home</a>
+        <input class="form-control" placeholder="Search by reponame" aria-describedby="button-addon2"
+        [(ngModel)]="reponame" name="reponame" type="search" placeholder="Search for Repositories" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit"  (click)="findRepoName()"><i
+            class="bi bi-search"></i></button>
+        </form>
+      <form class="d-flex">
+        <input class="form-control" placeholder="Search by username" aria-describedby="button-addon2"
+          [(ngModel)]="username" name="username" type="search" placeholder="Search for Users" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit" routerLink="users" (click)="findProfile()" type="submit"><i class="bi bi-search"></i></button>
+    </form>
+  </div>
+</nav>
+<div class="container-fluid">
+    <div class="space">
+      <div class="card shadow p-3 mb-5 bg-white rounded card quote-card" *ngFor="let repo of repos">
+  <div class="cardbody">
+          <div class="card">
+            <div class="card-body">
+                <div class="card-title"><a href={{repo.html_url}} target="_blank"
+                    appClickedRepo>{{repo.name|titlecase}}</a>
+                </div>
+     <p class="card-text" *ngIf="repo.description">{{repo.description}}</p>
+                <p class="card-text" *ngIf="!repo.description">No description for this repo</p>
+                <small>Last updated on {{repo.updated_at|date}}</small><br>
+                  <div *ngIf="repo.language">
+                    <i class="bi bi-circle-fill"></i>&nbsp;{{repo.language}}
+                  </div>&nbsp;&nbsp;
+                  <div *ngIf="!repo.language">
+                    <i class="bi bi-circle-fill"></i>&nbsp;No specified language
+                </div>&nbsp;&nbsp;
+                <div>
+                  {{repo.forks}}&nbsp;<i class="fas fa-code-branch"></i>&nbsp;Forks
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

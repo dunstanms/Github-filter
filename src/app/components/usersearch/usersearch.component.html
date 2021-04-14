@@ -1,0 +1,77 @@
+<nav class="navbar navbar-primary bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/users"></a>
+      <form class="d-flex">
+        <a class="navbar-brand" routerLink="/users">Home</a>
+        <input class="form-control" placeholder="Search by reponame" aria-describedby="button-addon2"
+          [(ngModel)]="reponame" name="reponame" type="search" placeholder="Search for Repositories" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit" routerLink="repositories" (click)="findRepos()"><i
+            class="bi bi-search"></i></button>
+      </form>
+  <form class="d-flex">
+        <input class="form-control" placeholder="Search by username" aria-describedby="button-addon2"
+          [(ngModel)]="username" name="username" type="search" placeholder="Search for Users" aria-label="Search">
+        <button class="btn btn-outline-secondary" type="submit" (click)="findProfile()"
+          type="submit"><i class="bi bi-search"></i></button>
+      </form>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="container-fluid">
+            <div class="card shadow p-3 mb-5 bg-secondary rounded card quote-card" id="user" >
+                <div class="cardbody">
+                  <div>
+       <img src={{user.avatar_url}} class="myprofile" alt="...">
+                  </div>
+                    <div>
+      <p *ngIf="user.name"><span>Name:</span>&nbsp;&nbsp;{{user.name}}</p>
+                      <p *ngIf="user.login"><span>Username:</span>&nbsp;&nbsp;{{user.login}}</p>
+                      <p><span>Followers:</span>&nbsp;&nbsp;{{user.followers}}</p>
+                <p><span>Following:</span>&nbsp;&nbsp;{{user.following}}</p>
+                <p *ngIf="user.public_repos"><span>Number of public
+                    repos:</span>&nbsp;&nbsp;{{user.public_repos}}
+                </p>
+                <p *ngIf="user.bio"><span>Bio Info:</span>&nbsp;&nbsp;{{user.bio}}</p>
+                <p *ngIf="user.created_at"><span>Joined
+                    on:</span>&nbsp;&nbsp;{{user.created_at|date}}&nbsp;({{user.created_at|daycreated}}) days(s) ago</p>
+                <p *ngIf="user.email"><span>Email:</span>&nbsp;&nbsp;{{user.email}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <div class="container-fluid">
+            <div class="space">
+  <div class="card shadow p-3 mb-5 bg-secondary rounded card quote-card" *ngFor="let repo of repos">
+                <div class="cardbody">
+                  <div class="card">
+                    <div class="card-body">
+                        <div class="card-title"><a href={{repo.html_url}} target="_blank"
+                            appClickedRepo>{{repo.name|titlecase}}</a>
+                        </div>
+    <p class="card-text" *ngIf="repo.description">{{repo.description}}</p>
+                        <p class="card-text" *ngIf="!repo.description">No description for this repo</p>
+                        <small>Last updated on {{repo.updated_at|date}}</small><br>
+    <div class="card-bottom">
+                          <div *ngIf="repo.language">
+                            <i class="bi bi-circle-fill"></i>&nbsp;{{repo.language}}
+                          </div>&nbsp;&nbsp;
+                          <div *ngIf="!repo.language">
+                            <i class="bi bi-circle-fill"></i>&nbsp;No specified language
+                          </div>&nbsp;&nbsp;
+                          <div><i class="fa fa-code-fork" aria-hidden="true"></i>&nbsp;
+                            {{repo.forks}}&nbsp;Forks
+                          </div>
+    </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>

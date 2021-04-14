@@ -1,0 +1,22 @@
+<nav class="navbar navbar-primary bg-primary">
+    <div class="container-fluid">
+  <a class="navbar-brand" routerLink="/users"><span><i
+            class="bi bi-github"></i></span>Github-Filter</a>
+      <form class="d-flex">
+  <button class="btn btn-outline-secondary" type="submit" routerLink="/repositories"><i
+            class="bi bi-search"></i></button>
+      </form>
+      <form class="d-flex">
+        <input class="form-control" placeholder="Search by username" aria-describedby="button-addon2"
+          name="username" type="search" placeholder="Search for Users" aria-label="Search">
+        <a class="navbar-brand" routerLink="/users">Home</a>
+        <input class="form-control" placeholder="Search by reponame" aria-describedby="button-addon2"
+         name="reponame" type="search" placeholder="Search for Repositories" aria-label="Search">
+         <button class="btn btn-outline-secondary" routerLink='/users' type="submit" type="submit"><i
+            class="bi bi-search"></i></button>
+      </form>
+    </div>
+</nav>
+<div>
+  <img src="./assets/1.jpg" alt="error image">
+</div>
